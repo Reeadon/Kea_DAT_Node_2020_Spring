@@ -7,6 +7,10 @@ var numberTwo = "2.30";
 // add those two numbers and show the result
 // you cannot touch line 1 neither line 2
 
+var newNumber = Number(numberOne) + Number(numberTwo);
+
+// console.log(newNumber);
+
 // --------------------------------------
 
 
@@ -16,6 +20,11 @@ var numberTwo = "2.30";
 var numberOne = "1.10";
 var numberTwo = "2.30";
 
+var result = (parseFloat(numberOne) + parseFloat(numberTwo)).toFixed(2);
+
+console.log(parseFloat(result));
+
+
 // --------------------------------------
 // Exercise 5 - Decimals and average
 
@@ -24,5 +33,28 @@ var two = 45;
 var three = 98;
 
 // Show in the console the avg. with 5 decimals
+
+var avg = one + two + three; 
+
+console.log((avg / 3).toFixed(5));
+
+
+// --------------------------------------
+
+
+// --------------------------------------
+// Exercise 6 - Get the character by index
+
+var letters = "abc"
+// Get me the character "c"
+
+
+
+// --------------------------------------
+// Exercise 7 - Replace
+
+var fact = "You are learning javascript!";
+
+// capitalize the J in Javascript
 
 // --------------------------------------
