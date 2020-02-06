@@ -68,3 +68,9 @@ console.log(newFact);
 console.log(fact.indexOf("j"));
 
 // --------------------------------------
+
+var myObject = {};
+
+{
+    
+}
