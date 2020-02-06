@@ -45,10 +45,14 @@ console.log((avg / 3).toFixed(5));
 // --------------------------------------
 // Exercise 6 - Get the character by index
 
-var letters = "abc"
+var letters = "abc";
 // Get me the character "c"
 
+console.log(letters[2]);
 
+console.log(letters.charAt(2));
+
+console.log(letters.substring(2));
 
 // --------------------------------------
 // Exercise 7 - Replace
@@ -56,5 +60,11 @@ var letters = "abc"
 var fact = "You are learning javascript!";
 
 // capitalize the J in Javascript
+
+var newFact = fact.replace("j", "J");
+
+console.log(newFact);
+
+console.log(fact.indexOf("j"));
 
 // --------------------------------------
