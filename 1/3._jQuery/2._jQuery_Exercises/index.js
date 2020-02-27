@@ -35,25 +35,19 @@ $("<p>First sentence</p>").insertBefore(".unused-box p");
 
 $(".unused-box").attr("class", "used-box");
 
-
-
-$(document).ready(() => {
-/*     $(".used-box").click(function() {
-        $(this).toggleClass("used-boxed-clicked");
-    });
- */
-    $(".used-box").click(event => {
-        $(event.currentTarget).toggleClass("used-boxed-clicked");
-    });
-
-/*     $(".used-box").on("click ", () => {
-    }); */
-
+// 16 - 18
+$("#submit-button").mouseenter(() => {
+    $(event.currentTarget).text("You're ready to click");
+}).mouseout(() => {
+    $(event.currentTarget).text("Click");
 });
 
-/* $(() => {
 
-}); */
+$("#submit-button").click(() => {
+   let count = $("#first-list li").length; 
 
+   $("#first-list").append(`<li>Reason ${count + 1}</li>`);
 
+   console.log($(event.currentTarget).parent());
+});
 
