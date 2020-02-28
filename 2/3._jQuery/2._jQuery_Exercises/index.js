@@ -69,6 +69,34 @@ $(document).ready(() => {
     $(".used-box").click(() => {
         $(".used-box").toggleClass("used-boxed-clicked");
     });
+
+/*     $("#submit-button").hover(
+        () => {
+            $("#submit-button").text("You're ready to click");
+        }, 
+        () => {
+            $("#submit-button").text("Click");
+        }
+    ); */
+
+/*     $("#submit-button").mouseenter(function() {
+        console.log("regular", this);
+        $(this).text("You're ready to click");
+    });
+    $("#submit-button").mouseleave((event) => {
+        console.log("arrow", this);
+        $(event.currentTarget).text("Click");
+    }); */
+/*     $("#submit-button").on("click mouseenter mouseleave", () => {
+        console.log("I just clicked");
+    });
+ */
+
+    $("#submit-button").click(() => {
+        let listNumber = $("#first-list li").length + 1;
+        $("#first-list").append("<li>Reason " + listNumber +"</li>");
+        console.log($(event.currentTarget).parent())
+    });
 });
 
 
