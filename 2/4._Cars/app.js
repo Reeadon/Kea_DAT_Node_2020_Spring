@@ -1,26 +1,47 @@
-const app = require("express")();
-const PORT = 3000;
+const express = require("express");
+const app = express();
+
+// parse application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: false }));
+ 
+// parse application/json
+app.use(express.json());
+
 
 let cars = [
     { id: 1, brand: "Mercedes" }, 
     { id: 2, brand: "BMW" }
 ];
+let currentId = 2;
+
 
 app.get("/", (req, res) => {
-    return res.send({ about: "Car API version 0.0.1" });
+    return res.send({ response: "Car API version 0.0.1" });
 });
 
 app.get("/cars", (req, res) => {
-    return res.send({ cars: cars })
+    return res.send({ response: cars })
 });
 
-// /cars/1
 app.get("/cars/:id", (req, res) => {
     const car = cars.find(car => car.id === Number(req.params.id));
-    return res.send({ car: car });
+    return res.send({ response: car });
 });
 
-const server = app.listen(3000, (error) => {
+app.post("/cars", (req, res) => {
+    let newCar = req.body;
+    newCar.id = ++currentId;
+    cars.push(newCar);
+
+    return res.send({ response: {} });
+});
+
+
+
+
+const port = process.env.PORT ? process.env.PORT : 3000;
+
+const server = app.listen(port, (error) => {
     if (error) {
         console.log("Error starting the server");
     }
