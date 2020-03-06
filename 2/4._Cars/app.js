@@ -36,8 +36,19 @@ app.post("/cars", (req, res) => {
     return res.send({ response: {} });
 });
 
+app.put("/cars/:id", (req, res) => {
+    const foundIndex = cars.findIndex(car => car.id === Number(req.params.id));
+    delete req.body.id;
+    const updatedCar = { ...cars[foundIndex], ...req.body };
+    cars[foundIndex] = updatedCar;
 
+    return res.send({ response: cars });
+});
 
+app.delete("/cars/:id", (req, res) => {
+    cars = cars.filter(car => car.id !== Number(req.params.id));
+    return res.send({ response: cars });
+});
 
 const port = process.env.PORT ? process.env.PORT : 3000;
 
