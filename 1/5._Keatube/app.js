@@ -11,8 +11,12 @@ app.use(express.static('public'));
 app.use(express.static('videos'));
 
 
-app.get("/video/:videoid", (req, res) => {
-    return res.sendFile(__dirname + "/public/video.html");
+app.get("/", (req, res) => {
+   return res.sendFile(__dirname + "/public/frontpage/frontpage.html");
+});
+
+app.get("/player/:videoid", (req, res) => {
+    return res.sendFile(__dirname + "/public/player/player.html");
 });
 
 
