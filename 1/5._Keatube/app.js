@@ -27,7 +27,12 @@ app.get("/player/:videoid", (req, res) => {
     return res.send(navbarPage + playerPage + footerPage);
 });
 
+// Import routes
+const videosRoute = require("./routes/videos");
 
+
+// Setup routes
+app.use(videosRoute);
 
 const port = process.env.PORT ? process.env.PORT : 3000;
 
