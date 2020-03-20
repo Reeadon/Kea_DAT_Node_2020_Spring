@@ -10,6 +10,9 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use(express.static('videos'));
 
+// SSR - Server Side Rendering
+// 1. Read the html files as strings [success criteria you can outside/afterwards console log the string]
+// 2. concatonate and serve the strings (At once!)
 
 app.get("/", (req, res) => {
     return res.sendFile(__dirname + "/public/frontpage/frontpage.html");
