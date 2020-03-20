@@ -10,16 +10,20 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use(express.static('videos'));
 
-// SSR - Server Side Rendering
-// 1. Read the html files as strings [success criteria you can outside/afterwards console log the string]
-// 2. concatonate and serve the strings (At once!)
+const fs = require("fs");
+
+const navbarPage = fs.readFileSync("./public/navbar/navbar.html", "utf8");
+const footerPage = fs.readFileSync("./public/footer/footer.html", "utf8");
+
+const frontpagePage = fs.readFileSync("./public/frontpage/frontpage.html", "utf8");
+const playerPage = fs.readFileSync("./public/player/player.html", "utf8");
 
 app.get("/", (req, res) => {
-    return res.sendFile(__dirname + "/public/frontpage/frontpage.html");
+    return res.send(navbarPage + frontpagePage + footerPage);
 });
 
 app.get("/player/:videoId", (req, res) => {
-    return res.sendFile(__dirname + "/public/player/player.html");
+    return res.send(navbarPage + playerPage + footerPage);
 });
 
 
