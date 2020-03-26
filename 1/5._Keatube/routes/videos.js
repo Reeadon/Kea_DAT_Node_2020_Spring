@@ -1,6 +1,24 @@
 const router = require("express").Router();
+
+const crypto = require("crypto");
+
 const multer = require("multer");
-const upload = multer({ dest: 'videos/' });
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "videos/");
+    },
+    filename: (req, file, cb) => {
+        const fileName = crypto.randomBytes(20).toString("hex");
+        const mimetypeArray = file.mimetype.split("/");
+        if (mimetypeArray[0] === "video") {
+            const extension = mimetypeArray[mimetypeArray.length - 1];
+            cb(null, fileName + "." + extension);
+        } else {
+            cb("Not a video error. Mimetype: " + file.mimetype);
+        }
+    }
+});
+const upload = multer({ storage: storage });
 
 const videos = [{
     title: "Ocean Waves",
@@ -29,11 +47,6 @@ router.get("/videos/:videoId", (req, res) => {
 router.post("/videos", upload.single('video'), (req, res) => {
     console.log(req.file);
     return res.redirect("/");
-});
-
-router.post("/test", (req, res) => {
-    console.log(req.body.fullName);
-    return res.send({ });
 });
 
 module.exports = router;
