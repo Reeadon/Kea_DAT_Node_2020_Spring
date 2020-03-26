@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const uuid = require('uuid').v4;
+const multer = require("multer");
+const upload = multer({ dest: 'videos/' });
 
 const videos = [{
     title: "Ocean Waves",
@@ -23,6 +24,16 @@ router.get("/videos", (req, res) => {
 
 router.get("/videos/:videoId", (req, res) => {       
     return res.send({ response: videos.find(video => video.fileName === req.params.videoId) });
+});
+
+router.post("/videos", upload.single('video'), (req, res) => {
+    console.log(req.file);
+    return res.redirect("/");
+});
+
+router.post("/test", (req, res) => {
+    console.log(req.body.fullName);
+    return res.send({ });
 });
 
 module.exports = router;
