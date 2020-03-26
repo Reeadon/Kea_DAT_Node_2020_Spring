@@ -11,8 +11,14 @@ const videos = [{
     uploadDate: new Date(2020, 3, 26, 08, 43)
 }];
 
+const videosPerPage = 10;
+
 router.get("/videos", (req, res) => {
-    return res.send({ response: videos });
+    const page = Number(req.query.page) ? Number(req.query.page) : 1;
+    const start = (page-1) * videosPerPage;
+    const end = start + videosPerPage;
+
+    return res.send({ response: videos.slice(start, end) });
 });
 
 router.get("/videos/:videoId", (req, res) => {       

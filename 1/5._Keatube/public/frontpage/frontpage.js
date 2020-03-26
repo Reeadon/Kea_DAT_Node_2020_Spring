@@ -1,4 +1,4 @@
-$.get("videos", (response) => {
+$.get("videos?page=1", (response) => {
     console.log(response.response);
     response.response.map((video) => {
         $("#video-gallery")
