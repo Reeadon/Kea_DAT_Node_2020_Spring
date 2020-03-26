@@ -5,3 +5,11 @@
 #logo {
     width: 10%;
 }
+
+#main-content {
+    min-height: calc(100vh - 80px);
+}
+
+footer {
+    height: 10px;
+}
