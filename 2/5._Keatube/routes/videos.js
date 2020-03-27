@@ -2,18 +2,22 @@ const router = require("express").Router();
 
 const crypto = require("crypto");
 
-
 const multer = require("multer");
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "videos/");
     },
     filename: (req, file, cb) => {
-        console.log(file);
-        console.log(crypto.randomBytes(18).toString("hex"));
+        const mimetypeArray = file.mimetype.split("/");
 
-        // get the encoding and add it to the random file name
-        cb(null, "test.mp4");
+        if (mimetypeArray[0] === "video") { 
+            const extension = mimetypeArray[mimetypeArray.length - 1];
+            const fileName = crypto.randomBytes(18).toString("hex");
+            
+            cb(null, fileName + "." + extension);
+        } else {
+            cb("Error: The file is not a video");
+        }
     }
 });
 
@@ -47,6 +51,5 @@ router.get("/videos/:videoId", (req, res) => {
 router.post("/videos", upload.single("uploadedVideo"), (req, res) => {
     return res.redirect("/");
 });
-
 
 module.exports = router;
