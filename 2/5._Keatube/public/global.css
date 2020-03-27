@@ -14,3 +14,8 @@
 footer {
     height: 10px;
 }
+
+#upload-link {
+    float: right;
+}
+
