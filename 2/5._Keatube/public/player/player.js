@@ -1,11 +1,8 @@
 const url = window.location.href;
 let videoId = url.substr(url.lastIndexOf("/") + 1);
 
-console.log(videoId);
-
 $.get(`/videos/${videoId}`)
     .done((data) => {
-        console.log(data.response);
 
         $("#title").text(data.response.title);
 
