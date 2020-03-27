@@ -1,14 +1,30 @@
 const url = window.location.href;
 let videoId = url.substr(url.lastIndexOf("/") + 1);
 
-// todo: Use Ajax to get the json info about this specific video.
+console.log(videoId);
 
-const player = `<video id="player" controls>
+$.get(`/videos/${videoId}`)
+    .done((data) => {
+        console.log(data.response);
+
+        $("#title").text(data.response.title);
+
+        const player = `<video id="player" controls>
                     <source src="/${videoId}" >
                     Your browser does not support the video tag.
                 </video>`;
 
-$("#player").append(player);
+        $("#player").append(player);
+
+        $("#description").text(data.response.description);
+    })
+    .catch((error) => {
+        console.log(error);
+        $("#title").text("Couldn't find the video");
+    });
+
+
+
 
 
 
