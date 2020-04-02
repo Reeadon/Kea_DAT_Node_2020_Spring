@@ -45,8 +45,11 @@ router.get("/videos/:videoId", (req, res) => {
 });
 
 router.post("/videos", upload.single('video'), (req, res) => {
+    console.log(req.body);
     console.log(req.file);
-    return res.redirect("/");
+    // 1. server side validate!
+    // 2. Create and add object. 
+    return res.redirect("/"); // <==== todo
 });
 
 module.exports = router;

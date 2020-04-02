@@ -3,12 +3,14 @@ let fileValid = false;
 function validateForm() {
     const title = document.forms.videoupload.title.value;
     const description = document.forms.videoupload.description.value;
+    const tags = document.forms.videoupload.tags.value;
+    const category = document.forms.videoupload.category.value;
     
-    if (title < 8 || title > 64) {
+    if (title.length < 8 || title.length > 64) {
         return false;
     }
 
-    if (description > 2048) {
+    if (description.length > 2048) {
         return false;
     }
 
@@ -27,10 +29,13 @@ function handleFileUpload(files) {
 
     const fileSize = file.size;
 
-    if (fileSize > xxxx) {
+    const twoGBFileLimit = 2147483648;
+
+    if (fileSize > twoGBFileLimit) {
         fileValid = false;
         return;
     }
 
+    fileValid = true;
 }
 
