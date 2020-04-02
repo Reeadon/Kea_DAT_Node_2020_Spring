@@ -74,7 +74,7 @@ router.post("/videos", upload.single('video'), (req, res) => {
         return res.send({ response: errors });
     } else {
         videos.push(video);
-        return res.redirect("/"); // <==== todo
+        return res.redirect(`/player/${video.fileName}`);
     } 
 });
 
