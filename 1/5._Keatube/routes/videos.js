@@ -44,12 +44,38 @@ router.get("/videos/:videoId", (req, res) => {
     return res.send({ response: videos.find(video => video.fileName === req.params.videoId) });
 });
 
+
 router.post("/videos", upload.single('video'), (req, res) => {
-    console.log(req.body);
-    console.log(req.file);
-    // 1. server side validate!
-    // 2. Create and add object. 
-    return res.redirect("/"); // <==== todo
+/*     console.log(req.body);
+    console.log(req.file); */
+
+    let errors = [];
+
+    const video = {
+        fileName: req.file.filename,
+        title: req.body.title || "",
+        description: req.body.description || "",
+        thumbnail: "", // todo
+        // todo below: check if it belongs to one of the accepted categories
+        category: req.body.category || "unknown", 
+        tags: req.body.tags.split(/\s*[,\s]\s*/),
+        uploadDate: new Date()
+    };
+
+    if (video.title.length < 8 || video.title.length > 64) {
+        errors.push("Title can't be between 8 and 64.");
+    }
+
+    if (video.description.length > 2048) {
+        errors.push("The description can't be longer than 2048 chars.");
+    }
+
+    if (errors.length > 0) {
+        return res.send({ response: errors });
+    } else {
+        videos.push(video);
+        return res.redirect("/"); // <==== todo
+    } 
 });
 
 module.exports = router;
