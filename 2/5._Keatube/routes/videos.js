@@ -24,7 +24,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 const videos = [{ 
-                id: "", 
                 title: "Night Sky",
                 thumbnail: "", 
                 description: "Watch this beautiful sky and enjoy the stars",
@@ -49,6 +48,38 @@ router.get("/videos/:videoId", (req, res) => {
 });
 
 router.post("/videos", upload.single("uploadedVideo"), (req, res) => {
+    const video = {
+        title: req.body.title,
+        description: req.body.description,
+        thumbnail: "",
+        fileName: req.file.filename,
+        uploadDate: new Date(),
+        category: "",
+        tags: []
+    };
+
+    /* Validation */
+    const titleMaxLength = 128; 
+
+    if (video.title.length === 0 || video.title.length > titleMaxLength) {
+        return res.status(400).send({ response: `Title cannot be empty or above ${titleMaxLength} chars.`});
+    }
+    
+    const descriptionMaxLength = 2048;
+
+    if (video.description.length > descriptionMaxLength) {
+        return res.status(400).send({ response: `Description cannot be above ${titleMaxLength} chars.`});
+    }
+
+    const fileSizeLimit = 262144000;
+
+    if (req.file.size > fileSizeLimit) {
+        return res.status(400).send({ response: `The video is bigger than ${fileSizeLimit} bytes.`});
+    }
+
+    /* Add video */
+    videos.push(video);
+
     return res.redirect("/");
 });
 
