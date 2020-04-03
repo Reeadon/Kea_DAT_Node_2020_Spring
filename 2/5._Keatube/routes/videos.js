@@ -49,14 +49,17 @@ router.get("/videos/:videoId", (req, res) => {
 
 router.post("/videos", upload.single("uploadedVideo"), (req, res) => {
     const video = {
-        title: req.body.title,
+        title: req.body.title.trim(),
         description: req.body.description,
         thumbnail: "",
         fileName: req.file.filename,
         uploadDate: new Date(),
-        category: "",
-        tags: []
+        category: req.body.category,
+        tags: req.body.tags.split(/\s*[,\s]\s*/),
     };
+
+
+
 
     /* Validation */
     const titleMaxLength = 128; 

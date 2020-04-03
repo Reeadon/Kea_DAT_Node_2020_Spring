@@ -3,6 +3,8 @@ let fileValid = false;
 function validateForm() {
     const title = document.forms.videoupload.title.value.trim();
     const description = document.forms.videoupload.description.value;
+    const tags = document.forms.videoupload.tags.value;
+    const category = document.forms.videoupload.category.value;
 
     const titleMaxLength = 128; 
 
