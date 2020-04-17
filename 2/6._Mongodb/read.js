@@ -8,7 +8,7 @@ mongoClient.connect(connectionUrl, { useUnifiedTopology: true }, (error, client)
 
     const cats = bigCatsDB.collection("cats");
 
-    cats.find({species: 'Bobcat'}).limit(3).toArray((error, foundCats) => {
+    cats.find({ species: 'Bobcat' }, { projection:  {_id: 0 } }).limit(3).toArray((error, foundCats) => {
         console.log(foundCats);
         client.close();
     });
