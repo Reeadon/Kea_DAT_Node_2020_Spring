@@ -11,7 +11,7 @@ mongoClient.connect(connectionUrl, { useUnifiedTopology: true }, (error, client)
     const buildings = animalFarmDB.collection('buildings');
     
     // findOne also works
-    buildings.find({ type: { $exists: true } }, { projection: { _id: 0 } }).limit(1).toArray((error, foundBuildings) => {
+    buildings.find({ type: { $exists: true }/* , age: { $lt: 10, $gt: 2 }  */}, { projection: { _id: 0 } }).limit(1).toArray((error, foundBuildings) => {
         console.log(foundBuildings);
         client.close();
     });
