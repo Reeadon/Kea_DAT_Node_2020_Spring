@@ -6,6 +6,7 @@
   "scripts": {
     "migrate:latest": "knex migrate:latest",
     "migrate:make": "knex migrate:make",
+    "migrate:rollback": "knex migrate:rollback",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
