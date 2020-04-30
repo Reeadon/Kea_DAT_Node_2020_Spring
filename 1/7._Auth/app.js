@@ -3,10 +3,6 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-    return res.send({ response: "OKOK" });
-});
-
 /* Setup Objection + Knex */
 
 const { Model } = require('objection');
@@ -16,6 +12,7 @@ const knexFile = require('./knexfile.js');
 const knex = Knex(knexFile.development);
 
 Model.knex(knex);
+
 
 /* Add routes */
 
