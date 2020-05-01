@@ -16,11 +16,6 @@ const knex = Knex(knexfile.development);
 Model.knex(knex);
 
 
-app.get("/", (req, res) => {
-    knex('users').select().then(users => {
-        return res.send({ response: users });
-    });
-});
 
 
 const PORT = 3000;

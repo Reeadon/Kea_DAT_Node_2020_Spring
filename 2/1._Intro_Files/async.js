@@ -15,11 +15,34 @@
 // pending
 // fulfilled (resolved)
 // rejected
-new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve("Everything went well");
-    }, 4000);
-});
+/* new Promise((resolve, reject) => {
+    try {
+        setTimeout(() => {
+            resolve("Everything went well");
+        }, 4000);
+    } catch {
+        reject("Something went wrong");
+    }
+}).then(message => console.log(message))
+.catch(message => console.log(message)); */
 
+// create a function called myPromise that returns a promise which fulfills after 5 seconds
+function myPromise() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve("I kept my promise");
+        }, 5000);
+    });
+}
 
+// async/await is syntactic sugar for Promises
+const arrowFunction = async () => {
+    /* myPromise().then(message => {
+        console.log(message);
+    }); */
+    const message = await myPromise();
+    console.log(message);
+}
+
+arrowFunction();
 
