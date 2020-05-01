@@ -3,9 +3,7 @@ const app = express();
 
 app.use(express.json());
 
-const authRoute = require('./routes/auth.js');
-
-app.use(authRoute);
+/* Setup Knex with Objection */
 
 const { Model } = require('objection');
 const Knex = require('knex');
@@ -15,6 +13,14 @@ const knex = Knex(knexfile.development);
 
 Model.knex(knex);
 
+/* Setup the routes with app */
+
+/*  */
+const authRoute = require('./routes/auth.js');
+const usersRoute = require('./routes/users.js');
+
+app.use(authRoute);
+app.use(usersRoute);
 
 
 
