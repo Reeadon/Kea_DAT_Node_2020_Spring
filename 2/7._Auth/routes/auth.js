@@ -8,9 +8,6 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/signup', (req, res) => {
-    /* User.query().select().then(users => {
-        return res.status(501).send({ response: users });
-    }); */
     const { username, password } = req.body;
 
     if (username && password) {
@@ -23,11 +20,14 @@ router.post('/signup', (req, res) => {
                     if (foundUser.length > 0) {
                         return res.status(400).send({ response: "User already exists" });
                     } else {
-                        // 2. add a new user
-
+                        User.query().insert({
+                            username,
+                            password
+                        }).then(createdUser => {
+                            return res.send({ response: `The user ${createdUser.username} was created` });
+                        });
                     }
-                    return res.send({ response: foundUser });
-    
+
                 });
             } catch (error) {
                 return res.status(500).send({ response: "Something went wrong with the DB" });
