@@ -8,4 +8,13 @@ router.get('/users/roles', async (req, res) => {
 });
 
 
+router.get('/setsessionvalue', (req, res) => {
+    req.session.myValue = ""; // take the value from the request and dynamically set it here
+    return res.send({ });
+});
+
+router.get('/getsessionvalue', (req, res) => {
+    return res.send({ response: req.session.myValue });
+});
+
 module.exports = router;

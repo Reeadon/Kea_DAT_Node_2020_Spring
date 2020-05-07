@@ -62,6 +62,7 @@ route.post("/signup", async (req, res) => {
 });
 
 route.get("/logout", (req, res) => {
+    // todo destroy the session
     return res.send({ response: "OKOK" });
 });
 
