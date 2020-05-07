@@ -1,8 +1,19 @@
 const route = require('express').Router();
-const User = require('../models/User.js');
 
+const User = require('../models/User.js');
+const Role = require('../models/Role.js');
+
+const bcrypt = require('bcrypt');
+const saltRounds = 12;
 
 route.post("/login", (req, res) => {
+    // 1. retrieve the login details and validate
+    // 2. check for a user match in the database
+    // 3. bcrypt compare
+    // 4. sessions
+    bcrypt.compare("plaintextPassword", "hashedPasswordToCompareWith").then((result) => {
+        console.log(result);
+    });
     return res.send({ response: "OKOK" });
 });
 
@@ -25,13 +36,14 @@ route.post("/signup", async (req, res) => {
             if (userFound.length > 0) {
                 return res.status(400).send({ response: "User already exists" });
             } else {
-                // todo implement the Role model
-                // await Role.query().select().where({ 'role': 'USER' });
+               
+                const defaultUserRoles = await Role.query().select().where({ role: 'USER' });
 
+                const hashedPassword = await bcrypt.hash(password, saltRounds);
                 const createdUser = await User.query().insert({
                     username,
-                    password,
-                    roleId: 2
+                    password: hashedPassword,
+                    roleId: defaultUserRoles[0].id
                 });
 
                 return res.send({ response: `User has been created with the username ${createdUser.username}` });
