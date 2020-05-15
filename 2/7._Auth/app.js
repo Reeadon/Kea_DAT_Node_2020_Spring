@@ -15,7 +15,11 @@ Model.knex(knex);
 
 /* Setup the routes with app */
 
-/*  */
+app.use((req, res) => {
+    console.log("Time of request: ", new Date());
+    return res.send();
+});
+
 const authRoute = require('./routes/auth.js');
 const usersRoute = require('./routes/users.js');
 

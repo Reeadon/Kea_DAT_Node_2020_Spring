@@ -2,8 +2,19 @@ const router = require('express').Router();
 
 const User = require("../models/User.js");
 
+const bcrypt = require('bcrypt');
+const saltRounds = 12;
+
 
 router.post('/login', (req, res) => {
+    // 1. Get the data from the request
+    // 2. Validate the data 
+    // 3. Check if user exists and get their password
+    // 4. Bcrypt compare
+    // 5. Send a response based on the comparison
+
+/*     bcrypt.compare("password", "$2b$12$ivRBaGRMAc5VSV68QVkBsel8Im6xv6ybGZU55QTRNN8W3ufmPG8da")
+    .then(result => console.log(result)); */
     return res.status(501).send({ response: "Not implemented yet" });
 });
 
@@ -20,11 +31,13 @@ router.post('/signup', (req, res) => {
                     if (foundUser.length > 0) {
                         return res.status(400).send({ response: "User already exists" });
                     } else {
-                        User.query().insert({
-                            username,
-                            password
-                        }).then(createdUser => {
-                            return res.send({ response: `The user ${createdUser.username} was created` });
+                        bcrypt.hash(password, saltRounds).then(hashedPassword => {
+                            User.query().insert({
+                                username,
+                                password: hashedPassword
+                            }).then(createdUser => {
+                                return res.send({ response: `The user ${createdUser.username} was created` });
+                            });
                         });
                     }
 
